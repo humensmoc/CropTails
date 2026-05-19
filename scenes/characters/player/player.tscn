@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://04gbyrw4s8xj"]
 
 [ext_resource type="Texture2D" uid="uid://bww5qk8fpmxjk" path="res://assets/game/characters/basic_character_actions.png" id="1_4ywt2"]
-[ext_resource type="Script" uid="uid://cqhj8cbsvu4og" path="res://scenes/character/player/player.gd" id="1_puv7k"]
+[ext_resource type="Script" uid="uid://cqhj8cbsvu4og" path="res://scenes/characters/player/player.gd" id="1_puv7k"]
 [ext_resource type="Texture2D" uid="uid://d113kpam72o6q" path="res://assets/game/characters/basic_character_spritesheet.png" id="2_sfcyi"]
 [ext_resource type="Script" uid="uid://celn2oe3v05x5" path="res://scripts/state_machine/node_state_machine.gd" id="3_ucfoo"]
-[ext_resource type="Script" uid="uid://cfkvcw67h4j6k" path="res://scenes/character/player/idle_state.gd" id="4_apd2u"]
-[ext_resource type="Script" uid="uid://d33ehtqh41f7o" path="res://scenes/character/player/walk_state.gd" id="5_apd2u"]
+[ext_resource type="Script" uid="uid://cfkvcw67h4j6k" path="res://scenes/characters/player/idle_state.gd" id="4_apd2u"]
+[ext_resource type="Script" uid="uid://d33ehtqh41f7o" path="res://scenes/characters/player/walk_state.gd" id="5_apd2u"]
+[ext_resource type="Script" uid="uid://esc137jjlpmk" path="res://scenes/characters/player/chopping_state.gd" id="7_hixpj"]
+[ext_resource type="Script" uid="uid://r5d8i3v4yn8s" path="res://scenes/characters/player/tilling_state.gd" id="8_v051h"]
+[ext_resource type="Script" uid="uid://b00n0fer0frjl" path="res://scenes/characters/player/watering_state.gd" id="9_i0j1t"]
+[ext_resource type="PackedScene" uid="uid://cvle46xjekko1" path="res://scenes/components/hit_component.tscn" id="10_3xnwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ucfoo"]
 atlas = ExtResource("1_4ywt2")
@@ -176,7 +180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_apd2u")
 }],
-"loop": true,
+"loop": false,
 "name": &"chopping_back",
 "speed": 3.0
 }, {
@@ -187,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hixpj")
 }],
-"loop": true,
+"loop": false,
 "name": &"chopping_front",
 "speed": 3.0
 }, {
@@ -198,7 +202,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i0j1t")
 }],
-"loop": true,
+"loop": false,
 "name": &"chopping_left",
 "speed": 3.0
 }, {
@@ -209,7 +213,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_in2if")
 }],
-"loop": true,
+"loop": false,
 "name": &"chopping_right",
 "speed": 3.0
 }, {
@@ -264,7 +268,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b1yw4")
 }],
-"loop": true,
+"loop": false,
 "name": &"tilling_back",
 "speed": 3.0
 }, {
@@ -275,7 +279,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h1g15")
 }],
-"loop": true,
+"loop": false,
 "name": &"tilling_front",
 "speed": 3.0
 }, {
@@ -286,7 +290,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_65puw")
 }],
-"loop": true,
+"loop": false,
 "name": &"tilling_left",
 "speed": 3.0
 }, {
@@ -297,7 +301,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_15a74")
 }],
-"loop": true,
+"loop": false,
 "name": &"tilling_right",
 "speed": 3.0
 }, {
@@ -352,7 +356,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_waret")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_back",
 "speed": 3.0
 }, {
@@ -363,7 +367,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_36xju")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_front",
 "speed": 3.0
 }, {
@@ -374,7 +378,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e0iw0")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_left",
 "speed": 3.0
 }, {
@@ -385,25 +389,33 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fgt8b")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_right",
 "speed": 3.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkcfm"]
-radius = 8.0
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3xnwo"]
+radius = 4.0
 
 [node name="Player" type="CharacterBody2D" unique_id=791774288]
+y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_puv7k")
+current_tool = 1
 
 [node name="AnimatedSprite2d" type="AnimatedSprite2D" parent="." unique_id=75595995]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_fmlog")
-animation = &"idle_back"
+animation = &"chopping_back"
 autoplay = "idle_front"
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=12751791]
-position = Vector2(0, -8)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_hkcfm")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1263709085 node_paths=PackedStringArray("initial_node_state")]
@@ -419,3 +431,27 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2d")
 script = ExtResource("5_apd2u")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2d")
+speed = 100.0
+
+[node name="Chopping" type="Node" parent="StateMachine" unique_id=1462514384 node_paths=PackedStringArray("player", "animated_sprite_2d", "hit_component_collision_2d")]
+script = ExtResource("7_hixpj")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2d")
+hit_component_collision_2d = NodePath("../../HitComponent/HitComponentCollisionShape2D")
+
+[node name="Tilling" type="Node" parent="StateMachine" unique_id=348258797 node_paths=PackedStringArray("player", "animated_sprite_2d")]
+script = ExtResource("8_v051h")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2d")
+
+[node name="Watering" type="Node" parent="StateMachine" unique_id=538322992 node_paths=PackedStringArray("player", "animated_sprite_2d")]
+script = ExtResource("9_i0j1t")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2d")
+
+[node name="HitComponent" parent="." unique_id=491918581 instance=ExtResource("10_3xnwo")]
+
+[node name="HitComponentCollisionShape2D" type="CollisionShape2D" parent="HitComponent" unique_id=1590776285]
+position = Vector2(3, -20)
+shape = SubResource("CircleShape2D_3xnwo")
+debug_color = Color(0.8536516, 0.0008174527, 0.89261615, 0.41960785)
