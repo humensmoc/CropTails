@@ -15,6 +15,10 @@ run/main_scene="uid://dldpknpc23w84"
 config/features=PackedStringArray("4.6")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+ToolManager="*uid://cgr6baqsahn2y"
+
 [display]
 
 window/size/viewport_width=640
