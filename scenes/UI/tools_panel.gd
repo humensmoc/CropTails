@@ -5,6 +5,19 @@ extends PanelContainer
 @onready var tool_corn: Button = $MarginContainer/HBoxContainer/ToolCorn
 @onready var tool_tomato: Button = $MarginContainer/HBoxContainer/ToolTomato
 
+func _ready() -> void:
+	ToolManager.on_enable_tool.connect(enable_tool)
+	tool_tilling.disabled=true
+	tool_tilling.focus_mode=Control.FOCUS_NONE
+	
+	tool_watering_can.disabled=true
+	tool_watering_can.focus_mode=Control.FOCUS_NONE
+	
+	tool_corn.disabled=true
+	tool_corn.focus_mode=Control.FOCUS_NONE
+	
+	tool_tomato.disabled=true
+	tool_tomato.focus_mode=Control.FOCUS_NONE
 
 func _on_tool_axe_pressed() -> void:
 	ToolManager.select_tool(DataTypes.Tools.AxeWood)
@@ -34,3 +47,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			tool_watering_can.release_focus()
 			tool_corn.release_focus()
 			tool_tomato.release_focus()
+
+func enable_tool(tool:DataTypes.Tools)->void:
+	if tool==DataTypes.Tools.TillGound:
+		tool_tilling.disabled=false
+		tool_tilling.focus_mode=Control.FOCUS_ALL
+	elif tool==DataTypes.Tools.WaterCrops:
+		tool_watering_can.disabled=false
+		tool_watering_can.focus_mode=Control.FOCUS_ALL
+	elif tool==DataTypes.Tools.PlantCorn:
+		tool_corn.disabled=false
+		tool_corn.focus_mode=Control.FOCUS_ALL
+	elif tool==DataTypes.Tools.PlantTomato:
+		tool_tomato.disabled=false
+		tool_tomato.focus_mode=Control.FOCUS_ALL

@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bwtygklnfjbdp" path="res://scenes/objects/plants/flowering_particles.tscn" id="1_vn5rf"]
 [ext_resource type="PackedScene" uid="uid://b63moi20sskpl" path="res://scenes/objects/plants/watering_particles.tscn" id="2_i4hd5"]
 [ext_resource type="PackedScene" uid="uid://bc1l2bl2j6tj8" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="3_huvgt"]
+[ext_resource type="PackedScene" uid="uid://dbwv2sgdejjys" path="res://scenes/components/save_data_component.tscn" id="7_83wcf"]
+[ext_resource type="Resource" uid="uid://cq42t8ejyoxe7" path="res://resources/scene_data_resource.tres" id="8_wpajg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_po2op"]
 size = Vector2(10, 10)
@@ -33,3 +35,6 @@ texture = ExtResource("1_tixv0")
 hframes = 6
 vframes = 2
 frame = 7
+
+[node name="SaveDataComponent" parent="." unique_id=1338747881 instance=ExtResource("7_83wcf")]
+save_data_resource = ExtResource("8_wpajg")
