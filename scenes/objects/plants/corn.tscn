@@ -8,9 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://bwtygklnfjbdp" path="res://scenes/objects/plants/flowering_particles.tscn" id="6_hgaca"]
 [ext_resource type="PackedScene" uid="uid://dbwv2sgdejjys" path="res://scenes/components/save_data_component.tscn" id="7_q3ekf"]
 [ext_resource type="Resource" uid="uid://cq42t8ejyoxe7" path="res://resources/scene_data_resource.tres" id="8_310os"]
+[ext_resource type="PackedScene" uid="uid://coic2twqoknrr" path="res://scenes/components/mouse_interactable_component.tscn" id="9_g345r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofjf8"]
 size = Vector2(13, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b00wr"]
 
 [node name="Corn" type="Node2D" unique_id=1447651209]
 y_sort_enabled = true
@@ -39,3 +42,9 @@ shape = SubResource("RectangleShape2D_ofjf8")
 
 [node name="SaveDataComponent" parent="." unique_id=1338747881 instance=ExtResource("7_q3ekf")]
 save_data_resource = ExtResource("8_310os")
+
+[node name="MouseInteractableComponent" parent="." unique_id=1935614769 instance=ExtResource("9_g345r")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseInteractableComponent" unique_id=483826392]
+shape = SubResource("CircleShape2D_b00wr")
+debug_color = Color(2.8878452e-07, 0.6365239, 0.40775606, 0.41960785)

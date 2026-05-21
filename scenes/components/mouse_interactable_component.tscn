@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://coic2twqoknrr"]
+
+[ext_resource type="Script" uid="uid://cp5ewj86ea2um" path="res://scenes/components/mouse_interactable_component.gd" id="1_u8ju3"]
+
+[node name="MouseInteractableComponent" type="Area2D" unique_id=1935614769]
+script = ExtResource("1_u8ju3")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

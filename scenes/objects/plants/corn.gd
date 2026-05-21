@@ -7,6 +7,8 @@ var corn_harvest_scene=preload("res://scenes/objects/plants/corn_harvest.tscn")
 @onready var watering_particles: GPUParticles2D = $WateringParticles
 @onready var flowering_particles: GPUParticles2D = $FloweringParticles
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
+@onready var mouse_interactable_component: Area2D = $MouseInteractableComponent
+
 
 var growth_state:DataTypes.GrowthStates=DataTypes.GrowthStates.Seed
 
@@ -17,6 +19,7 @@ func _ready() -> void:
 	hurt_component.hurt.connect(on_hurt)
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
+	mouse_interactable_component.mouse_enter.connect(on_mouse_enter)
 
 func _process(delta: float) -> void:
 	growth_state=growth_cycle_component.get_current_growth_state()
@@ -43,3 +46,8 @@ func add_corn_harvest_scene()->void:
 	var corn_harvest_instance=corn_harvest_scene.instantiate() as Node2D
 	corn_harvest_instance.global_position=global_position
 	get_parent().add_child(corn_harvest_instance)
+
+func on_mouse_enter()->void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(sprite_2d,"scale",Vector2(0.5,0.5),0.2)
+	tween.tween_property(sprite_2d,"scale",Vector2(1,1),0.2)
