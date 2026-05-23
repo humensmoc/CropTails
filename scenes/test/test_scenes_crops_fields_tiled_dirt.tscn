@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bhp3nw0q127qo" path="res://scenes/components/save_level_data_component.tscn" id="8_8qu1o"]
 [ext_resource type="Script" uid="uid://b7qj1np8dsmjj" path="res://scenes/components/save_level_data_component.gd" id="9_qx6f3"]
 [ext_resource type="PackedScene" uid="uid://b66g5a8y36b3d" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="10_qx6f3"]
+[ext_resource type="PackedScene" uid="uid://bd00cg7v4glnc" path="res://scenes/characters/guide/guide.tscn" id="13_oka13"]
 
 [node name="TestSceneCropsFieldsTilledDirt" type="Node2D" unique_id=1107724109]
 
@@ -42,19 +43,22 @@ save_data_resource = ExtResource("7_oka13")
 
 [node name="CropFields" type="Node2D" parent="." unique_id=1611190075]
 
-[node name="FieldCursorComponent" parent="." unique_id=1897580211 node_paths=PackedStringArray("grass_tilemap_layer", "tilled_soil_tilemap_layer") instance=ExtResource("3_hu0dn")]
-grass_tilemap_layer = NodePath("../GameTilemap/Grass")
-tilled_soil_tilemap_layer = NodePath("../GameTilemap/TilledSoil")
-
 [node name="Player" parent="." unique_id=791774288 instance=ExtResource("3_qud4m")]
 position = Vector2(61, 152)
 current_tool = 0
+
+[node name="FieldCursorComponent" parent="." unique_id=1897580211 node_paths=PackedStringArray("grass_tilemap_layer", "tilled_soil_tilemap_layer") instance=ExtResource("3_hu0dn")]
+grass_tilemap_layer = NodePath("../GameTilemap/Grass")
+tilled_soil_tilemap_layer = NodePath("../GameTilemap/TilledSoil")
 
 [node name="GameScreen" parent="." unique_id=875049515 instance=ExtResource("4_8qu1o")]
 
 [node name="CropsCursorComponent" parent="." unique_id=965833153 node_paths=PackedStringArray("tilled_soil_tilemap_layer") instance=ExtResource("6_qcptj")]
 script = ExtResource("7_qud4m")
 tilled_soil_tilemap_layer = NodePath("../GameTilemap/TilledSoil")
+
+[node name="Guide" parent="." unique_id=1045709018 instance=ExtResource("13_oka13")]
+position = Vector2(210, 138)
 
 [node name="Corn" parent="." unique_id=1447651209 instance=ExtResource("5_qx6f3")]
 position = Vector2(256, 171)

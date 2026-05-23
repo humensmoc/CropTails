@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://celn2oe3v05x5" path="res://scripts/state_machine/node_state_machine.gd" id="2_14ngq"]
 [ext_resource type="Script" uid="uid://b72q3ppeseay" path="res://scenes/characters/cow/idle_state.gd" id="3_ilrem"]
 [ext_resource type="Script" uid="uid://8wnpuuf7v0d6" path="res://scenes/characters/cow/walk_state.gd" id="4_ilrem"]
+[ext_resource type="PackedScene" uid="uid://bg38i047c5rmi" path="res://scenes/components/audio_play_time_component.tscn" id="6_cgos1"]
+[ext_resource type="PackedScene" uid="uid://dqt44p0shx6kb" path="res://audio/sfx/cow_moo_sfx.tscn" id="7_gsrfl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sa3qd"]
 atlas = ExtResource("1_kc4rr")
@@ -90,3 +92,10 @@ script = ExtResource("4_ilrem")
 character = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 navigation_agent_2d = NodePath("../../NavigationAgent2D")
+
+[node name="AudioPlayTimeComponent" parent="." unique_id=130984139 node_paths=PackedStringArray("audio_stream_player_2d") instance=ExtResource("6_cgos1")]
+wait_time = 5.0
+autostart = true
+audio_stream_player_2d = NodePath("../CowMooSFX")
+
+[node name="CowMooSFX" parent="." unique_id=242242464 instance=ExtResource("7_gsrfl")]

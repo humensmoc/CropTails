@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://4gvi1skgp1w4"]
+
+[ext_resource type="Theme" uid="uid://btxgssebg8w3a" path="res://scenes/ui/game_ui_theme.tres" id="1_5slcd"]
+[ext_resource type="PackedScene" uid="uid://crrryky2cc07u" path="res://scenes/ui/game_menu_screen_background.tscn" id="1_arotu"]
+[ext_resource type="Script" uid="uid://btagcrs4r1fjs" path="res://scenes/ui/game_menu_screen.gd" id="1_l5nq4"]
+
+[node name="GameMenuScreen" type="CanvasLayer" unique_id=1501510659]
+script = ExtResource("1_l5nq4")
+
+[node name="GameMenuScreenBackground" parent="." unique_id=1107724109 instance=ExtResource("1_arotu")]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1529982960]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5slcd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=402234926]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1384771702]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"GameMenuButton"
+text = "Start"
+
+[node name="SaveGameButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=348414928]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"GameMenuButton"
+text = "Save"
+
+[node name="ExitGameButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=699075329]
+custom_minimum_size = Vector2(100, 29)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"GameMenuButton"
+text = "Exit"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=2037611953]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer" unique_id=1380024779]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.60279256, 0.45931488, 0.29576734, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 54
+text = "CROPTAILS"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
